@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cifra de César</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/visual.js" defer></script>
+</head>
+
+<body>
+  <main data-alfabeto="$alfabeto" data-aba="$aba_inicial">
+    <header>
+      <h1>Cifra de César</h1>
+      <p>Um texto, uma chave e um deslocamento de caracteres.</p>
+    </header>
+
+    <div class="abas" role="tablist" aria-label="Explore a cifra">
+      <button id="aba-visualizar" role="tab" aria-controls="visualizar" aria-selected="true">01
+        <span>Visualizar</span></button>
+      <button id="aba-cifrar" role="tab" aria-controls="cifrar" aria-selected="false" tabindex="-1">02 <span>Cifrar
+          texto</span></button>
+    </div>
+    <section id="visualizar" role="tabpanel" aria-labelledby="aba-visualizar" class="painel visual">
+      <div class="visual-titulo">
+        <div>
+          <h2>Uma letra. Algumas posições.<br>Uma nova mensagem.</h2>
+        </div><span class="selo">a → b → c</span>
+      </div>
+      <p class="introducao">Mude o deslocamento e acompanhe cada letra viajando pelo alfabeto.</p>
+      <div class="controles-visual">
+        <div><label for="palavra">Palavra base</label><input id="palavra" type="text" value="cesar" maxlength="12"
+            autocomplete="off" spellcheck="false">
+          <p class="ajuda">Até 12 caracteres para explorar.</p>
+        </div>
+        <div><label for="passos">Deslocamento</label>
+          <div class="passos-controle"><button type="button" id="diminuir"
+              aria-label="Diminuir deslocamento">−</button><input id="passos" type="number" value="0" step="1"
+              aria-describedby="passos-ajuda"><button type="button" id="aumentar"
+              aria-label="Aumentar deslocamento">+</button></div>
+          <p class="ajuda" id="passos-ajuda">Positivo avança. Negativo volta.</p>
+        </div>
+      </div>
+      <div class="controle-faixa"><span>−$max_chave</span><input id="faixa" type="range" min="-$max_chave"
+          max="$max_chave" value="0" aria-label="Arraste para mudar o deslocamento"><span>+$max_chave</span></div>
+      <p id="erro-visual" class="erro" role="alert" hidden>Informe um número inteiro.</p>
+      <div class="palco">
+        <div class="legenda-linha">ORIGINAL <span></span></div>
+        <div id="originais" class="letras" aria-label="Palavra original"></div>
+        <div class="ponte"><span class="linha-ponte"></span><span id="indicador">0 posições · sem
+            deslocamento</span><span class="linha-ponte"></span></div>
+        <div class="legenda-linha">CIFRADA <span></span></div>
+        <div id="animadas" class="letras" aria-hidden="true"></div>
+        <p class="leitura-resultado">Resultado <output id="saida-visual" aria-live="polite">cesar</output></p>
+      </div>
+      <div class="nota-visual"><span aria-hidden="true">↻</span>
+        <p>A lista tem <strong>$quantidade caracteres</strong>. Ao chegar ao fim, voltamos ao início. Espaços, números e
+          pontuação ficam no lugar.</p>
+      </div>
+      <noscript>Ative o JavaScript para usar a animação. O formulário abaixo continua disponível.</noscript>
+      <section class="explicacao" aria-labelledby="titulo-explicacao">
+        <h2 id="titulo-explicacao">Como funciona?</h2>
+        <p>A cifra de César substitui cada caractere por outro a uma distância fixa na lista. Essa distância é a
+          <strong>chave</strong>. A ordem das letras na palavra permanece igual; o que muda é o caractere de cada
+          posição.
+        </p>
+        <div class="exemplo" aria-label="Com a chave 3, abc vira def"><span>abc</span><span class="deslocamento">+ 3
+            →</span><span>def</span></div>
+
+        <article class="bloco-estudo">
+          <h3>01 / Lógica em linguagem natural</h3>
+          <ol class="etapas">
+            <li><strong>Receber:</strong> ler o texto e uma chave inteira, como 3 ou −3.</li>
+            <li><strong>Preparar:</strong> normalizar os acentos e carregar a lista de caracteres.</li>
+            <li><strong>Percorrer:</strong> analisar um caractere do texto por vez.</li>
+            <li><strong>Decidir:</strong> se estiver na lista, deslocar sua posição; se não estiver, preservá-lo.</li>
+            <li><strong>Recomeçar:</strong> ao ultrapassar uma ponta da lista, continuar pela outra.</li>
+            <li><strong>Montar:</strong> juntar os caracteres na mesma ordem e exibir o resultado.</li>
+          </ol>
+            (<code>if</code>) e repetição (<code>for</code>).</p>
+        </article>
+
+        <article class="bloco-estudo">
+          <h3>02 / Pseudocódigo</h3>
+          <p>Uma maneira de escrever a solução antes de escolher a linguagem de programação.</p>
+          <pre><code>LER texto, chave e lista de caracteres
+N ← quantidade de caracteres da lista
+resultado ← texto vazio
+
+PARA CADA caractere DO texto
+    SE caractere ESTÁ NA lista
+        valor ← posição do caractere
+        novo ← ((valor − 1 + chave) módulo N) + 1
+        ADICIONAR caractere da posição novo AO resultado
+    SENÃO
+        ADICIONAR caractere original AO resultado
+    FIM SE
+FIM PARA
+
+EXIBIR resultado</code></pre>
+        </article>
+
+        <article class="bloco-estudo">
+          <h3>03 / A matemática do deslocamento</h3>
+          <p class="formula"><code>novo valor = ((valor − 1 + chave) % N) + 1</code></p>
+          <dl class="conceitos">
+            <dt>valor − 1</dt>
+            <dd>A configuração começa em 1. Subtrair 1 adapta o cálculo ao intervalo de 0 a N − 1.</dd>
+            <dt>+ chave</dt>
+            <dd>Avança ou volta a quantidade de posições escolhida.</dd>
+            <dt>% N</dt>
+            <dd>Usa o resto da divisão para manter a posição dentro da lista, como uma volta em um círculo.</dd>
+            <dt>+ 1</dt>
+            <dd>Retorna à numeração original da configuração.</dd>
+          </dl>
+          <p>Exemplo: <strong>a = 1</strong>, chave <strong>3</strong> e N = <strong>$quantidade</strong>.</p>
+          <pre><code>((1 − 1 + 3) % $quantidade) + 1 = 4
+Posição 4 → d</code></pre>
+          <p><strong>N é a quantidade de caracteres configurados: $quantidade.</strong> Há $quantidade deslocamentos
+            distintos, de 0 a $max_chave. A chave 0 mantém o texto. Chaves separadas por $quantidade produzem o mesmo
+            resultado.</p>
+          <p>Para <strong>decifrar</strong>, use o oposto da chave: cifrar com 3 e depois com −3 recupera o texto
+            original normalizado.</p>
+        </article>
+
+        <article class="bloco-estudo">
+          <h3>04 / Configuração em JSON</h3>
+          <p>O arquivo <code>config.json</code> associa cada caractere a um número. Este é um trecho do início da
+            configuração:</p>
+          <pre><code>{
+  "a": 1, "b": 2, "c": 3,
+  "d": 4, "e": 5, "f": 6
+}</code></pre>
+          <p>Os valores da configuração completa devem ir de 1 até N, sem repetições ou lacunas. O Python valida essas
+            regras ao carregar o arquivo.</p>
+          <p>Minúsculas, maiúsculas e letras acentuadas pertencem à <strong>mesma lista</strong>. Por isso, uma letra
+            pode mudar de caixa ou ganhar acento. Espaços, números, pontuação e qualquer caractere fora da lista
+            permanecem iguais.</p>
+          <p class="ajuda">JSON representa os dados da configuração; não é uma linguagem de programação.</p>
+        </article>
+
+        <article class="bloco-estudo">
+          <h3>05 / Algoritmo codificado em Python</h3>
+          <p>Este é o núcleo de <code>cifrar</code>, em <code>cifra.py</code>. O dicionário <code>valores</code>
+            encontra o número de uma letra; <code>caracteres</code> faz o caminho inverso.</p>
+          <pre><code>caracteres = {valor: caractere
+              for caractere, valor in valores.items()}
+quantidade = len(valores)
+resultado = []
+
+for caractere in texto:
+    if caractere in valores:
+        valor_atual = valores[caractere]
+        novo_valor = ((valor_atual - 1 + chave) % quantidade) + 1
+        resultado.append(caracteres[novo_valor])
+    else:
+        resultado.append(caractere)
+
+return "".join(resultado)</code></pre>
+          <p><code>for</code> percorre o texto, <code>if/else</code> escolhe o tratamento, <code>append</code> guarda
+            cada resultado e <code>join</code> monta a mensagem final.</p>
+        </article>
+      </section>
+    </section>
+    <div id="cifrar" role="tabpanel" aria-labelledby="aba-cifrar">
+      <section class="painel" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario">Cifra na Prática</h2>
+        <form method="post" action="/">
+          <label for="texto">1. Escreva seu texto</label>
+          <textarea id="texto" name="texto" rows="5" placeholder="Ex.: Olá, mundo!" required>$texto</textarea>
+
+          <label for="chave">2. Escolha a chave</label>
+          <p class="ajuda" id="ajuda-chave">A chave é o número de posições que cada caractere vai avançar. Use um
+            inteiro; valores negativos voltam posições.</p>
+          <div class="acoes">
+            <input id="chave" name="chave" type="number" step="1" value="$chave" aria-describedby="ajuda-chave"
+              required>
+            <button type="submit">Cifrar texto <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="erro" role="alert" $erro_oculto>$erro</p>
+        </form>
+
+        <div class="resultado">
+          <label for="resultado">3. Veja o resultado</label>
+          <textarea id="resultado" rows="4" readonly
+            placeholder="Seu texto cifrado aparecerá aqui.">$resultado</textarea>
+          <section class="contas" aria-labelledby="titulo-contas" $contas_ocultas>
+            <h3 id="titulo-contas">Conta de cada caractere</h3>
+            <p class="ajuda">O deslocamento segue a lista configurada. Ao passar de uma ponta, continua pela outra.</p>
+            <ol class="lista-contas">$contas</ol>
+          </section>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+
+</html>

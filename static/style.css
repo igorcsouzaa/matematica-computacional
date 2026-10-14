@@ -1,0 +1,108 @@
+:root {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #203731;
+  background: #f5f6f2;
+  line-height: 1.6;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+main { width: min(100% - 36px, 960px); margin: 48px auto; }
+header { margin-bottom: 28px; }
+.etiqueta { color: #507168; font-size: 12px; font-weight: 700; letter-spacing: 2px; }
+h1 { margin: 8px 0; font-size: clamp(32px, 6vw, 46px); line-height: 1.15; letter-spacing: -1.5px; }
+h2 { margin: 0 0 20px; font-size: 22px; }
+p { margin: 12px 0; }
+header > p:last-child { color: #596961; }
+.painel { padding: 30px; background: white; border: 1px solid #dce3dc; border-radius: 16px; }
+label { display: block; margin-bottom: 8px; font-weight: 600; }
+textarea, input, button { font: inherit; border-radius: 8px; }
+textarea, input { width: 100%; padding: 12px; color: #203731; background: #fff; border: 1px solid #aebeb5; }
+textarea { display: block; resize: vertical; min-height: 110px; }
+form > textarea { margin-bottom: 24px; }
+textarea::placeholder { color: #69756f; opacity: 1; }
+.ajuda { color: #596961; font-size: 14px; }
+.acoes { display: flex; gap: 12px; margin-top: 16px; }
+input { width: 110px; min-width: 0; }
+button { padding: 12px 24px; border: 0; background: #23624b; color: white; font-weight: 600; cursor: pointer; }
+button:hover { background: #184d39; }
+button span { margin-left: 12px; }
+:focus-visible { outline: 3px solid #bc851c; outline-offset: 3px; }
+.resultado { margin-top: 28px; border-top: 1px solid #e4e9e3; padding-top: 24px; }
+.resultado textarea { background: #f2f7f2; border-color: #cadace; }
+.contas { margin-top: 24px; }
+.contas h3 { margin: 0 0 8px; font-size: 18px; }
+.lista-contas { padding-left: 28px; }
+.lista-contas li { padding: 8px 4px; border-bottom: 1px solid #e4e9e3; font-family: Consolas, monospace; overflow-wrap: anywhere; }
+.erro { color: #a12121; }
+.explicacao { padding: 30px 4px 0; }
+.explicacao h2 { margin-bottom: 12px; }
+.visual .explicacao { margin-top: 30px; border-top: 1px solid #dce3dc; }
+.bloco-estudo { margin-top: 28px; padding-top: 24px; border-top: 1px solid #e4e9e3; min-width: 0; }
+.bloco-estudo h3 { margin: 0 0 12px; font-size: 19px; color: #23624b; }
+.bloco-estudo p { overflow-wrap: anywhere; }
+.etapas { padding-left: 24px; }
+.etapas li { padding: 4px 0 4px 6px; }
+.etapas li::marker { color: #23624b; font-weight: 700; }
+.bloco-estudo pre { max-width: 100%; overflow-x: auto; padding: 20px; border: 1px solid #324b40; border-radius: 10px; background: #203731; color: #edf5df; line-height: 1.75; tab-size: 4; }
+.bloco-estudo pre code { font-family: Consolas, monospace; font-size: 13px; }
+.conceitos { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px 20px; }
+.conceitos dt { font-family: Consolas, monospace; font-weight: 700; color: #23624b; }
+.conceitos dd { margin: 0; }
+.exemplo { display: flex; align-items: center; gap: 28px; margin: 22px 0; font: 600 30px monospace; }
+.deslocamento { color: #507168; font: 16px "Segoe UI", Arial, sans-serif; }
+.formula { background: #e9eee6; border-radius: 8px; padding: 14px; overflow-wrap: anywhere; }
+code { font-size: 14px; }
+footer { margin-top: 28px; padding-top: 18px; border-top: 1px solid #dce3dc; color: #596961; font-size: 13px; }
+.abas { display: flex; gap: 6px; padding: 6px; background: #e6ebe4; border-radius: 12px; margin-bottom: 24px; }
+.abas button { flex: 1; color: #64736a; background: transparent; font-size: 13px; }
+.abas button span { margin-left: 10px; font-size: 15px; }
+.abas button[aria-selected="true"] { color: #204d3b; background: white; box-shadow: 0 2px 6px #20373112; }
+.visual { padding: 36px; }
+.visual-titulo { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.visual-titulo .etiqueta { margin: 0 0 12px; font-size: 10px; }
+.visual h2 { font-size: clamp(24px, 4vw, 32px); line-height: 1.25; letter-spacing: -1px; margin: 0; }
+.selo { padding: 12px 18px; border: 1px solid #dce3dc; border-radius: 30px; white-space: nowrap; color: #507168; font-family: monospace; }
+.introducao { color: #596961; margin: 16px 0 28px; }
+.controles-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.controles-visual input { width: 100%; }
+.controles-visual .ajuda { font-size: 12px; margin: 7px 0 0; }
+#palavra { font-weight: 600; letter-spacing: 2px; }
+.passos-controle { display: flex; gap: 8px; }
+.passos-controle button { padding: 8px 18px; font-size: 22px; }
+.passos-controle input { text-align: center; font-weight: 700; appearance: textfield; -moz-appearance: textfield; }
+.passos-controle input::-webkit-inner-spin-button { appearance: none; }
+.controle-faixa { display: flex; align-items: center; gap: 14px; margin: 22px 0; color: #64736a; font: 12px monospace; }
+.controle-faixa input { flex: 1; padding: 0; accent-color: #23624b; cursor: pointer; }
+.palco { --altura: 76px; padding: 28px; background: #eff3ed; border: 1px solid #dee7da; border-radius: 12px; }
+.legenda-linha { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #507168; margin-bottom: 14px; }
+.legenda-linha span { font-weight: 400; letter-spacing: 0; }
+.letras { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; min-height: var(--altura); }
+.letra { width: 54px; height: var(--altura); display: block; text-align: center; line-height: var(--altura); background: #fff; border: 1px solid #d8e0d4; border-radius: 9px; font-family: Consolas, monospace; font-size: 36px; box-shadow: 0 3px 0 #d8e0d4; }
+.janela { overflow: hidden; background: #23624b; border-color: #23624b; color: #f3facb; box-shadow: 0 3px 0 #153f30; }
+.digito { display: block; height: var(--altura); line-height: var(--altura); }
+.rolo { display: block; }
+.ponte { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 26px 0; font-size: 12px; color: #23624b; }
+#indicador { overflow-wrap: anywhere; text-align: center; }
+.linha-ponte { height: 1px; background: #cad7c5; flex: 1; }
+.leitura-resultado { display: flex; justify-content: center; align-items: baseline; flex-wrap: wrap; gap: 12px; margin: 24px 0 0; font-size: 12px; color: #64736a; }
+.leitura-resultado output { font: 600 20px Consolas, monospace; color: #23624b; overflow-wrap: anywhere; }
+.nota-visual { display: flex; gap: 14px; align-items: center; color: #596961; font-size: 13px; margin-top: 18px; }
+.nota-visual > span { font-size: 30px; color: #23624b; }
+@media (max-width: 480px) {
+  main { margin: 28px auto; }
+  .painel { padding: 20px; }
+  .acoes { flex-wrap: wrap; }
+  button { flex: 1; padding: 12px 16px; }
+  .visual-titulo .selo { display: none; }
+  .controles-visual { grid-template-columns: 1fr; gap: 16px; }
+  .palco { --altura: 58px; padding: 18px 12px; }
+  .letras { gap: 6px; }
+  .letra { width: 36px; font-size: 27px; border-radius: 6px; }
+  .legenda-linha { font-size: 9px; letter-spacing: .6px; }
+  .legenda-linha span { max-width: 110px; text-align: right; }
+  .conceitos { grid-template-columns: 1fr; gap: 6px; }
+  .conceitos dd { margin-bottom: 12px; }
+  .bloco-estudo pre { padding: 14px; }
+}
